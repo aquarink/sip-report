@@ -51,4 +51,40 @@ class Report extends CI_Controller {
 
 		$this->load->view('template/main', $data);
 	}
+
+	public function RecordingHistory() {
+		// $this->session->userdata('uname')
+		// $this->session->userdata('role');
+
+		if($this->session->userdata('uname') == '') {
+			redirect(base_url());
+		}
+
+		$cdr_list = $this->ClientsModel->GetCallHistory();
+
+		$data = array(
+			'view_file' 	=> 'report/recording',
+			'cdr_list'		=> $cdr_list,
+		);
+
+		$this->load->view('template/main', $data);
+	}
+
+	public function ReadFileRecording() {
+
+		if($this->input->get('voice') != '') {
+
+			$path 		= "/var/spool/asterisk/monitor/";
+			$filenya 	= $path.$this->input->get('voice');
+
+			if(file_exists($filenya)) {
+				header('Content-Type: application/octet-stream');
+				header("Content-Transfer-Encoding: Binary"); 
+				header("Content-disposition: attachment; filename=\"" . basename($filenya) . "\""); 
+				readfile($filenya); 
+			}
+		}
+		
+		
+	}
 }

@@ -14,7 +14,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"> Call History</a>
+                <a class="navbar-brand" href="#"> Recoding of Call</a>
             </div>
         </div>
     </nav>
@@ -24,10 +24,10 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-icon" data-background-color="green">
-                            <i class="material-icons">perm_phone_msg</i>
+                            <i class="material-icons">record_voice_over</i>
                         </div>
                         <div class="card-content">
-                            <h4 class="card-title">Call History</h4>
+                            <h4 class="card-title">Recoding of Call</h4>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>
@@ -41,10 +41,7 @@
                                             <th>Chanel</th>
                                             <th>Dest Chanel</th>
                                             <th>SIP</th>
-                                            <th>Duration</th>
-                                            <th>Bill Sec</th>
-                                            <th>Dispotition</th>
-                                            <!-- <th>Play</th> -->
+                                            <th colspan="2">Voice Recording</th>
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -58,9 +55,32 @@
                                             <td><?php echo $cdr->channel; ?></td>
                                             <td><?php echo $cdr->dstchannel; ?></td>
                                             <td><?php echo $cdr->lastdata; ?></td>
-                                            <td><?php echo $cdr->duration; ?></td>
-                                            <td><?php echo $cdr->billsec; ?></td>
-                                            <td><?php echo $cdr->disposition; ?></td>
+
+                                            <?php if($cdr->recordingfile != '') { ?>
+                                            <td>
+                                                <button class="btn btn-danger" onclick="playWAV('<?php echo urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile)); ?>');">
+                                                    <i class="material-icons">play_arrow</i> Play
+                                                </button>
+                                            </td>
+
+                                            <td>
+                                                <a class="btn btn-info" href="<?php echo base_url('client-recording?voice='.urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile))); ?>">
+                                                    <i class="material-icons">cloud_download</i> Download
+                                                </a>
+                                            </td>
+                                            <?php } else { ?>
+                                            <td>
+                                                <button class="btn btn-default">
+                                                    <i class="material-icons">play_arrow</i> Can't Play
+                                                </button>
+                                            </td>
+
+                                            <td>
+                                                <a class="btn btn-default" href="#">
+                                                    <i class="material-icons">cloud_download</i> Can't Download
+                                                </a>
+                                            </td>
+                                            <?php } ?>
                                             <td><?php echo $cdr->calldate; ?></td>
                                         </tr>
                                         <?php } } ?>

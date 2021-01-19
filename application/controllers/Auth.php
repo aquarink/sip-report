@@ -55,8 +55,8 @@ class Auth extends CI_Controller {
 
 					redirect(base_url('dashboard'));
 				} else {
-					// $msg = 'Account not found';
-					// redirect(base_url('?msg='.$msg));
+					$msg = 'Account not found';
+					redirect(base_url('?msg='.$msg));
 				}
 			}
 		} else {

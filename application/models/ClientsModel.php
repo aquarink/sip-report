@@ -16,7 +16,7 @@ class ClientsModel extends CI_Model
     }
 
     public function CheckClient($uname, $passw) {
-        echo $sql = "SELECT * FROM clients WHERE uname = ".$this->db->escape($uname)." AND passw = ".$this->db->escape($passw)." LIMIT 1";
+        $sql = "SELECT * FROM clients WHERE uname = ".$this->db->escape($uname)." AND passw = ".$this->db->escape($passw)." LIMIT 1";
         $query = $this->db->query($sql);
         return $query->result();
     }

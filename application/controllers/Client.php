@@ -72,26 +72,4 @@ class Client extends CI_Controller {
 			redirect(base_url('client-add?msg='.$msg));
 		}
 	}
-
-	public function ReadRecordingFile() {
-		if($this->input->get('path') != '') {
-			if(file_exists($this->input->get('path'))) {
-	            header('Content-Description: File Transfer');
-	            header('Content-Type: application/octet-stream');
-	            header('Content-Disposition: attachment; filename="'.basename($this->input->get('path')).'"');
-	            header('Expires: 0');
-	            header('Cache-Control: must-revalidate');
-	            header('Pragma: public');
-	            header('Content-Length: ' . filesize($this->input->get('path')));
-	            flush(); // Flush system output buffer
-	            readfile($this->input->get('path'));
-	        } else {
-	         	http_response_code(404);
-		        die();
-	        }
-		} else {
-			http_response_code(404);
-	        die();
-		}
-	}
 }

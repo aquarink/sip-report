@@ -64,3 +64,5 @@ $route['client-submit'] 		= 'Client/SubmitNewClient';
 $route['client-read-file'] 		= 'Client/ReadRecordingFile';
 
 $route['client-report'] 		= 'Report/CallHistory';
+$route['client-voice'] 			= 'Report/RecordingHistory';
+$route['client-recording'] 		= 'Report/ReadFileRecording';

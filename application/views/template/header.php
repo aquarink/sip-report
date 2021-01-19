@@ -86,6 +86,12 @@
                             <p>Report</p>
                         </a>
                     </li>
+                    <li <?php if($sg == 'client-voice') { echo 'class="active"'; } ?>>
+                        <a href="<?php echo base_url('client-voice'); ?>">
+                            <i class="material-icons">settings_voice</i>
+                            <p>Voice Recording</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
