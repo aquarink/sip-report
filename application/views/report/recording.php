@@ -71,13 +71,13 @@
                                             <?php } else { ?>
                                             <td>
                                                 <button class="btn btn-default">
-                                                    <i class="material-icons">play_arrow</i> Can't Play
+                                                    <i class="material-icons">shuffle</i>
                                                 </button>
                                             </td>
 
                                             <td>
                                                 <a class="btn btn-default" href="#">
-                                                    <i class="material-icons">cloud_download</i> Can't Download
+                                                    <i class="material-icons">cloud_off</i>
                                                 </a>
                                             </td>
                                             <?php } ?>
