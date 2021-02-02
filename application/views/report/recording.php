@@ -81,37 +81,29 @@
                                             <td><?php echo $cdr->lastdata; ?></td>
 
                                             <?php if($cdr->recordingfile != '') { ?>
-                                            <td>
-                                                <button class="btn btn-danger" onclick="playWAV('<?php echo urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile)); ?>');">
-                                                    <i class="material-icons">play_arrow</i> Play
-                                                </button>
-                                            </td>
+                                                <?php if($this->session->userdata('role') == 'admin' || $download_flag) { ?>
+                                                    <td>
+                                                        <button class="btn btn-danger" onclick="playWAV('<?php echo urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile)); ?>');">
+                                                            <i class="material-icons">play_arrow</i> Play
+                                                        </button>
+                                                    </td>
 
-                                            <td>
-                                                <?php if($this->session->userdata('role') == 'admin') { ?>
-                                                    <a class="btn btn-info" href="<?php echo base_url('client-recording?voice='.urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile))); ?>">
-                                                        <i class="material-icons">cloud_download</i> Download
-                                                    </a>
-                                                <?php } elseif($download_flag) { ?>
-                                                    <a class="btn btn-info" href="<?php echo base_url('client-recording?voice='.urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile))); ?>">
-                                                        <i class="material-icons">cloud_download</i> Download
-                                                    </a>
+                                                    <td>
+                                                        <a class="btn btn-info" href="<?php echo base_url('client-recording?voice='.urlencode(str_replace('/var/spool/asterisk/monitor/', '', $cdr->recordingfile))); ?>">
+                                                            <i class="material-icons">cloud_download</i> Download
+                                                        </a>
+                                                    </td>
                                                 <?php } else { ?>
-                                                    <button class="btn btn-default" href="#">
-                                                        <i class="material-icons">cloud_off</i>
-                                                    </button>
+                                                    <td colspan="2">
+                                                        <button class="btn btn-default">
+                                                            <i class="material-icons">shuffle</i> Can't playing or download at this time
+                                                        </button>
+                                                    </td>
                                                 <?php } ?>
-                                            </td>
                                             <?php } else { ?>
-                                            <td>
-                                                <button class="btn btn-default">
-                                                    <i class="material-icons">shuffle</i>
-                                                </button>
-                                            </td>
-
-                                            <td>
+                                            <td colspan="2">
                                                 <button class="btn btn-default" href="#">
-                                                    <i class="material-icons">cloud_off</i>
+                                                    <i class="material-icons">cloud_off</i> No File
                                                 </button>
                                             </td>
                                             <?php } ?>
