@@ -62,12 +62,68 @@ class Report extends CI_Controller {
 
 		$cdr_list = $this->ClientsModel->GetCallHistory();
 
+		$timeDownloadConf = "./assets/download.time.conf";
+		$downloadFlag = false;
+					
+		if (file_exists($timeDownloadConf)) {
+			if(filesize($timeDownloadConf) > 0) {
+
+				$fileOpen = fopen($timeDownloadConf, "r");
+				$fieldText = fread($fileOpen, filesize($timeDownloadConf));
+				fclose($fileOpen);
+
+				//
+				$explField = explode(',', $fieldText);
+				foreach ($explField as $key => $val) {
+
+					if(date('H') == $val) {
+						$downloadFlag = true;
+					}
+				}
+			}
+		}
+
 		$data = array(
 			'view_file' 	=> 'report/recording',
 			'cdr_list'		=> $cdr_list,
+			'download_flag' => $downloadFlag,
 		);
 
 		$this->load->view('template/main', $data);
+	}
+
+	public function SetTimeDownload() {
+		if($this->session->userdata('uname') != '' && $this->session->userdata('role') == 'admin') {
+			$timeDownload = $this->input->post('timeForDownload');
+
+			if($timeDownload != '') {
+
+				$path = './assets/';
+				if (!file_exists($path)) { mkdir($path, 0777, true); }
+
+		    	// File
+		    	$fileMT = $path."download.time.conf";
+
+		    	// Data
+		    	$dataMt = $timeDownload;
+
+		        $fileOpen  = fopen($fileMT,"a");
+
+		        try {
+		            fwrite($fileOpen, $dataMt);
+		            fclose($fileOpen);
+
+		            redirect(base_url('client-voice?msg=Success sets time'));
+		        } catch (Exception $e) {
+		            redirect(base_url('client-voice?msg=Failed sets time'));
+		        }
+
+			} else {
+				redirect(base_url('client-voice?msg=Set time first'));
+			}
+		} else {
+			redirect(base_url('client-voice?msg=Not Authorized'));
+		}
 	}
 
 	public function ReadFileRecording() {
@@ -84,7 +140,5 @@ class Report extends CI_Controller {
 				readfile($filenya); 
 			}
 		}
-		
-		
 	}
 }
