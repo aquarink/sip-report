@@ -46,9 +46,6 @@
 									<div class="card-header text-center" data-background-color="rose">
 										<h4 class="card-title">Signin</h4>
 									</div>
-									<p class="category text-center">
-										auth section
-									</p>
 									<div class="card-content">
 										<div class="input-group">
 											<span class="input-group-addon">
@@ -56,7 +53,7 @@
 											</span>
 											<div class="form-group label-floating">
 												<label class="control-label">Username</label>
-												<input type="text" class="form-control" name="usernameTxt" placeholder="Username" required="">
+												<input type="text" class="form-control" name="usernameTxt"required="">
 											</div>
 										</div>
 										<div class="input-group">
@@ -65,7 +62,7 @@
 											</span>
 											<div class="form-group label-floating">
 												<label class="control-label">Password</label>
-												<input type="password" class="form-control" name="passwordTxt" placeholder="Password" required="">
+												<input type="password" class="form-control" name="passwordTxt" required="">
 											</div>
 										</div>
 									</div>

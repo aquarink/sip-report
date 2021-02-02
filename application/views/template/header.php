@@ -45,9 +45,9 @@
             </div>
             <div class="sidebar-wrapper">
                 <div class="user">
-                    <div class="photo">
+                    <!-- <div class="photo">
                         <img src="<?php echo base_url('assets/material-dashboard-pro'); ?>/assets/img/faces/avatar.jpg" />
-                    </div>
+                    </div> -->
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <?php if($this->session->userdata('uname') != '') { echo strtoupper($this->session->userdata('uname')); } ?>
